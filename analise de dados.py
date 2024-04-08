@@ -127,11 +127,6 @@ Analise da distribuição de procedimentos realizados (do dataframe "Atendidos")
 Análise focada: Identificar os tipos mais comuns de procedimentos realizados e relacioná-los com as condições de saúde mais prevalentes entre esses pacientes.
 """
 
-import pandas as pd
-
-# Supondo que os DataFrames 'cadastros' e 'atendimentos' já foram carregados e mesclados corretamente em 'dados_combinados'
-# ...
-
 # Contagem dos procedimentos mais comuns
 procedimentos_comuns = dados_combinados['PROCEDIMENTO'].value_counts().head(10)
 print("Procedimentos mais comuns:")
