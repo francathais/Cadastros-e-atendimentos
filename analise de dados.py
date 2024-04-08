@@ -63,7 +63,40 @@ print(f"HIPERTENSAO_ARTERIAL SIM: {len(hipertensao_sim)}, NAO: {len(hipertensao_
 print(f"USO_ALCOOL SIM: {len(uso_alcool_sim)}, NAO: {len(uso_alcool_nao)}")
 print(f"FUMANTE SIM: {len(fumante_sim)}, NAO: {len(fumante_nao)}")
 
+# Criar uma distribuição norma
+# Configurações estéticas do Seaborn
+sns.set(style="whitegrid")
+
+# Calcular a idade a partir da data de nascimento
+cadastros['data_nascimento'] = pd.to_datetime(cadastros['data_nascimento'])
+cadastros['idade'] = (pd.to_datetime('now') - cadastros['data_nascimento']).astype('<m8[Y]')
+
+# Filtrar os dados para hipertensão arterial 'SIM'
+dados_hipertensao_sim = cadastros[cadastros['hipertensao_arterial'] == 'SIM']
+
+# Criar o gráfico de distribuição normal
+plt.figure(figsize=(10, 6))
+sns.kdeplot(data=dados_hipertensao_sim, x='idade', fill=True)  
+plt.title("Distribuição Normal da Idade para Hipertensão Arterial 'SIM'")
+plt.xlabel("Idade")
+plt.ylabel("Densidade")
+
+# Calcular média e desvio padrão
+media = dados_hipertensao_sim['idade'].mean()
+desvio_padrao = dados_hipertensao_sim['idade'].std()
+
+# Adicionar informações no gráfico
+plt.axvline(media, color='red', linestyle='dashed', linewidth=1, label=f'Média: {media:.2f}')
+plt.axvline(media + desvio_padrao, color='green', linestyle='dashed', linewidth=1, label=f'Média + Desvio Padrão')
+plt.axvline(media - desvio_padrao, color='green', linestyle='dashed', linewidth=1, label=f'Média - Desvio Padrão')
+plt.legend()
+
+plt.show()
+
+
 """ATENDIMENTO"""
+
+Atendiemntos
 
 # Análises com porcentagem
 # 1. Contagem e porcentagem de atendimentos por categoria profissional
